@@ -1,0 +1,91 @@
+@use 'variables' as v;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Neucha&display=swap');
+
+html {
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+main {
+  height: 90%;
+}
+
+.adv-content {
+  width: 92%;
+  height: 100%;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin: -50px auto 0;
+
+  .adv-content-text {
+    width: 100%;
+    text-align: center;
+    color: v.$text-color;
+  }
+}
+
+.adv-content-btn {
+  font-size: 1.1em;
+  font-family: 'Montserrat', sans-serif;
+  color: v.$text-color;
+  background-color: v.$background;
+  border: none;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 45px;
+  margin-left: 0;
+  position: relative;
+  top: 2%;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: fit-content;
+  transition: 1s;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+}
+
+
+.adv-content-btn {
+  letter-spacing: 0;
+}
+
+.adv-content-btn:hover,
+.adv-content-btn:active {
+  letter-spacing: 5px;
+}
+
+.adv-content-btn:after,
+.adv-content-btn:before {
+  backface-visibility: hidden;
+  border: 1px solid rgba(#fff, 0);
+  bottom: 0;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+.adv-content-btn:hover:after,
+.adv-content-btn:hover:before {
+  backface-visibility: hidden;
+  border-color: v.$text-color;
+  transition: width 350ms ease-in-out;
+  width: 90%;
+}
+
+.adv-content-btn:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 90%;
+}
