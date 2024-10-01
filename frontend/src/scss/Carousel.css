@@ -1,0 +1,67 @@
+.carousel-container {
+  margin: 0 auto 50px auto;
+  position: relative;
+  width: 90%;
+}
+.carousel-container .section-name-header {
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  color: #1644c0;
+  border-bottom: 1px #1644c0 solid;
+}
+
+.carousel {
+  width: 90%;
+  margin: auto;
+  position: relative;
+}
+.carousel .carousel-slides {
+  display: flex;
+  justify-content: space-evenly;
+  transition: 1.5s;
+}
+.carousel .carousel-slide {
+  transition: 1.5s;
+}
+.carousel .carousel-slide img {
+  width: 150px;
+  height: fit-content;
+}
+.carousel .carousel-slide .book-info {
+  text-align: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.carousel .carousel-slide .book-info h3, .carousel .carousel-slide .book-info p {
+  margin: 0;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.carousel-button:hover {
+  background-color: rgba(26, 26, 26, 0.5);
+}
+.carousel-button.prev {
+  left: 10px;
+}
+.carousel-button.next {
+  right: 10px;
+}
+
+/*# sourceMappingURL=Carousel.css.map */
