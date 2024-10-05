@@ -4,7 +4,7 @@ import '../scss/Footer.css'
 function Footer() {
     return (
         <footer>
-            © 2024 VibeReads. Все права защищены.
+            made with <span className="heart">️❤️️</span> by xxxdvt
         </footer>
     );
 }

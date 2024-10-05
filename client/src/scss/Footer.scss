@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+
 footer {
+  font-family: Montserrat , serif;
   position: absolute;
   bottom: 1%;
   left: 50%;
   font-size: 0.8em;
   transform: translateX(-50%);
-  color: white
+  color: white;
+  .heart {
+    content: "❤️";
+  }
 }
