@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../scss/Carousel.css'; // Подключение SCSS стилей
-import cover from '../assets/img/cover3.jpg'
 
 const Carousel = ({ books, sectionName, booksPerSlide = 4 }) => {
     const [startIndex, setStartIndex] = useState(0); // Индекс первой отображаемой книги
@@ -33,11 +32,11 @@ const Carousel = ({ books, sectionName, booksPerSlide = 4 }) => {
                 <div className="carousel-slides">
                     {getVisibleBooks().map((book, index) => (
                         <div key={index} className="carousel-slide">
-                            <img src={cover} alt={book.title} />
+                            <img src={book.thumbnail} alt={book.title} />
                             <div className="book-info">
-                                <h3>{book.title}</h3>
-                                <p>{book.author}</p>
-                                <p>{book.rating}</p>
+                                <p className='hn'>{book.title}</p>
+                                <p className='hn1'>{book.author}</p>
+                                <p className='hn1'>{book.rating}</p>
                             </div>
                         </div>
                     ))}
@@ -52,19 +51,18 @@ const Carousel = ({ books, sectionName, booksPerSlide = 4 }) => {
 };
 
 const MultiCarousel = () => {
+    // const sections = ['Новинки', 'Популярные книги'];
+    const [myData, setMyData] = useState([{}])
+    useEffect(() => {
+        fetch('http://127.0.0.1:5000/api/books').then(
+            response => response.json()
+        ).then(data => setMyData(data));
+    }, []);
+    console.log(Array.from(myData));
     const sections = [
         {
             sectionName: 'Новинки',
-            books: [
-                { title: 'Книга 1', author: 'Автор 1', rating: '4.8/5', thumbnail: 'url_to_image_1' },
-                { title: 'Книга 2', author: 'Автор 2', rating: '4.1/5', thumbnail: 'url_to_image_2' },
-                { title: 'Книга 3', author: 'Автор 3', rating: '4.5/5', thumbnail: 'url_to_image_3' },
-                { title: 'Книга 4', author: 'Автор 4', rating: '5/5', thumbnail: 'url_to_image_4' },
-                { title: 'Книга 5', author: 'Автор 5', rating: '4.7/5', thumbnail: 'url_to_image_5' },
-                { title: 'Книга 6', author: 'Автор 6', rating: '4.3/5', thumbnail: 'url_to_image_6' },
-                { title: 'Книга 7', author: 'Автор 7', rating: '3.8/5', thumbnail: 'url_to_image_7' },
-                { title: 'Книга 8', author: 'Автор 8', rating: '2.3/5', thumbnail: 'url_to_image_8' },
-            ],
+            books: myData
         },
         {
             sectionName: 'Популярное',

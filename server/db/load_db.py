@@ -66,4 +66,4 @@ def fetch_books_and_save_to_db():
 
 
 # Запуск функции
-fetch_books_and_save_to_db()
+# fetch_books_and_save_to_db()

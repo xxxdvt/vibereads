@@ -1,11 +1,12 @@
 .carousel-container {
+  font-family: Montserrat, sans-serif;
   margin: 0 auto 50px auto;
   position: relative;
   width: 90%;
 }
 .carousel-container .section-name-header {
   font-size: 1.3em;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   color: #1644c0;
   border-bottom: 1px #1644c0 solid;
 }
@@ -14,40 +15,48 @@
   width: 90%;
   margin: auto;
   position: relative;
+  transition: 1s;
 }
 .carousel .carousel-slides {
   display: flex;
   justify-content: space-evenly;
-  transition: 1.5s;
+  transition: 1s;
 }
 .carousel .carousel-slide {
-  transition: 1.5s;
+  transition: 1s;
 }
 .carousel .carousel-slide img {
   width: 150px;
   height: fit-content;
 }
 .carousel .carousel-slide .book-info {
+  color: whitesmoke;
   text-align: center;
   position: relative;
   margin: 0;
   padding: 0;
   width: 100%;
 }
-.carousel .carousel-slide .book-info h3, .carousel .carousel-slide .book-info p {
+.carousel .carousel-slide .book-info p {
   margin: 0;
+}
+.carousel .carousel-slide .book-info .hn {
+  font-weight: bold;
+}
+.carousel .carousel-slide .book-info .hn1 {
+  font-size: 0.8em;
 }
 
 .carousel-button {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 40%;
+  transform: translateY(-50%) scale(1.4);
+  background-color: #040638;
   border: none;
   color: #fff;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -55,7 +64,7 @@
   z-index: 10;
 }
 .carousel-button:hover {
-  background-color: rgba(26, 26, 26, 0.5);
+  background-color: #070b68;
 }
 .carousel-button.prev {
   left: 10px;
