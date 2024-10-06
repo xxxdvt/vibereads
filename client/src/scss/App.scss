@@ -3,24 +3,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Neucha&display=swap');
 
 html {
-  overflow-y: hidden;
   scrollbar-width: none;
 }
 
 main {
   height: 90%;
+  flex: 1;
 }
 
 .adv-content {
   width: 92%;
-  height: 100%;
-
-  flex: 1;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-self: center;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   margin: -50px auto 0;
 
   .adv-content-text {

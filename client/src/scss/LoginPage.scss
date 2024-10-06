@@ -1,115 +1,120 @@
-@use 'variables' as v;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+  @use 'variables' as v;
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+.login-wrapper {
+  height: 90%;
+  flex: 1;
+  .login-container {
+    background: #fff;
+    font-family: Montserrat, sans-serif;
+    max-width: 350px;
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
 
-.login-container {
-  background: #fff;
-  font-family: Montserrat, sans-serif;
-  max-width: 350px;
-  width: 100%;
-  height: 400px;
-  margin: 0 auto;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+    form {
+      .login-title {
+        font-size: 2em;
+        font-weight: 600;
+        margin: 40px 0 10px 0;
+        position: relative;
 
-  form {
-    .login-title {
-      font-size: 2em;
-      font-weight: 600;
-      margin: 40px 0 10px 0;
-      position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          height: 4px;
+          width: 59px;
+          left: 0;
+          bottom: 2px;
+          border-radius: 5px;
+          background: linear-gradient(to right, v.$primary 0%, v.$secondary 100%);
+        }
+      }
 
-      &:before {
-        content: '';
-        position: absolute;
-        height: 4px;
-        width: 59px;
-        left: 0;
-        bottom: 2px;
-        border-radius: 5px;
-        background: linear-gradient(to right, v.$primary 0%, v.$secondary 100%);
+      .login-input-box {
+        width: 100%;
+        height: 45px;
+        margin-top: 20px;
+        position: relative;
+
+        input {
+          width: 100%;
+          height: 100%;
+          outline: none;
+          font-size: 16px;
+          border: none;
+
+          &:focus ~ .login-underline::after,
+          &:valid ~ .login-underline::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+
+      .login-underline {
+        &::before {
+          content: '';
+          position: absolute;
+          height: 2px;
+          width: 100%;
+          background: #ccc;
+          left: 0;
+          bottom: 0;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          height: 2px;
+          width: 100%;
+          background: linear-gradient(to right, v.$primary 0%, v.$secondary 100%);
+          left: 0;
+          bottom: 0;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: all 0.3s ease;
+        }
+      }
+
+      .login-button {
+        margin: 40px 0 20px 0;
       }
     }
 
     .login-input-box {
-      width: 100%;
-      height: 45px;
-      margin-top: 20px;
-      position: relative;
+      input[type="submit"] {
+        font-family: Montserrat, sans-serif;
+        background: linear-gradient(to right, v.$primary 0%, v.$secondary 100%);
+        font-size: 17px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
 
-      input {
-        width: 100%;
-        height: 100%;
-        outline: none;
-        font-size: 16px;
-        border: none;
-
-        &:focus ~ .login-underline::after,
-        &:valid ~ .login-underline::after {
-          transform: scaleX(1);
-          transform-origin: left;
+        &:hover {
+          letter-spacing: 2px;
+          background: linear-gradient(to left, v.$primary 0%, v.$secondary 100%);
         }
       }
     }
 
-    .login-underline {
-      &::before {
-        content: '';
-        position: absolute;
-        height: 2px;
-        width: 100%;
-        background: #ccc;
-        left: 0;
-        bottom: 0;
-      }
+    .login-alternative {
+      font-size: 0.9em;
+      text-align: center;
+      text-decoration: none;
 
-      &::after {
-        content: '';
-        position: absolute;
-        height: 2px;
-        width: 100%;
-        background: linear-gradient(to right, v.$primary 0%, v.$secondary 100%);
-        left: 0;
-        bottom: 0;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: all 0.3s ease;
-      }
-    }
+      :-webkit-any-link {
+        text-decoration-color: v.$primary;
 
-    .login-button {
-      margin: 40px 0 20px 0;
-    }
-  }
-
-  .login-input-box {
-    input[type="submit"] {
-      font-family: Montserrat, sans-serif;
-      background: linear-gradient(to right, v.$primary 0%, v.$secondary 100%);
-      font-size: 17px;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: 1px;
-
-      &:hover {
-        letter-spacing: 2px;
-        background: linear-gradient(to left, v.$primary 0%, v.$secondary 100%);
       }
     }
   }
-  .login-alternative {
-    font-size: 0.9em;
-    text-align: center;
-    text-decoration: none;
-    :-webkit-any-link {
-      text-decoration-color: v.$primary;
 
-    }
+  input, input::placeholder {
+    font-family: Montserrat, sans-serif;
   }
-}
-
-input, input::placeholder {
-  font-family: Montserrat, sans-serif;
 }

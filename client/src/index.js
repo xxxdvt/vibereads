@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import MoodSearchPage from "./pages/MoodSearchPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import CatalogPage from "./pages/CatalogPage";
 
 function Main() {
     return (
@@ -19,10 +20,11 @@ function Main() {
                 <Route path='/' element={<App/>}/>
                 <Route path='/login' element={<LoginPage/>}/>
                 <Route path='/register' element={<RegisterPage/>}/>
+                <Route path='/catalog' element={<CatalogPage/>}/>
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/mood-search' element={<MoodSearchPage/>}/>
             </Routes>
-            <Footer />
+            <Footer/>
         </Router>
     );
 }

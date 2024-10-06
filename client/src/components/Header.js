@@ -9,7 +9,7 @@ function Header() {
                 <Link to='/'><p className='app-name'>VibeReads</p></Link>
                 <div className="btn-wrapper">
                     <Link to='/'><p className='search-bar-btn'>Поиск</p></Link>
-                    <Link to='/'><p className='catalog-btn'>Каталог</p></Link>
+                    <Link to='/catalog'><p className='catalog-btn'>Каталог</p></Link>
                     <Link to='/'><p className='mood-search-btn'>Настроение</p></Link>
                     <Link to='/'><p className='contacts-btn'>Контакты</p></Link>
                     <Link to='/login'><p className="login-btn">Вход</p></Link>

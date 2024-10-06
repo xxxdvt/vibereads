@@ -3,7 +3,7 @@
 #root {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Высота на 100% окна */
+  min-height: 100vh; /* Высота на 100% окна */
   background: v.$background
 }
 
