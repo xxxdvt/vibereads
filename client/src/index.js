@@ -11,6 +11,7 @@ import MoodSearchPage from "./pages/MoodSearchPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CatalogPage from "./pages/CatalogPage";
+import AboutPage from "./pages/AboutPage";
 
 function Main() {
     return (
@@ -21,6 +22,7 @@ function Main() {
                 <Route path='/login' element={<LoginPage/>}/>
                 <Route path='/register' element={<RegisterPage/>}/>
                 <Route path='/catalog' element={<CatalogPage/>}/>
+                <Route path='/about' element={<AboutPage/>}/>
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/mood-search' element={<MoodSearchPage/>}/>
             </Routes>
@@ -30,6 +32,7 @@ function Main() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(<Main/>);
 
 reportWebVitals();

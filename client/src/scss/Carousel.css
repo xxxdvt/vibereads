@@ -16,6 +16,8 @@
   margin: auto;
   position: relative;
   transition: 1s;
+  display: grid;
+  grid-template-columns: 1fr 15fr 1fr;
 }
 .carousel .carousel-slides {
   display: flex;
@@ -28,6 +30,7 @@
 .carousel .carousel-slide img {
   width: 150px;
   height: fit-content;
+  margin: 0 auto;
 }
 .carousel .carousel-slide .book-info {
   color: whitesmoke;
@@ -47,10 +50,12 @@
   font-size: 0.8em;
 }
 
-.carousel-button {
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%) scale(1.4);
+.carousel-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-button-wrapper .carousel-button {
   background-color: #040638;
   border: none;
   color: #fff;
@@ -63,14 +68,8 @@
   align-items: center;
   z-index: 10;
 }
-.carousel-button:hover {
+.carousel-button-wrapper .carousel-button:hover {
   background-color: #070b68;
-}
-.carousel-button.prev {
-  left: 10px;
-}
-.carousel-button.next {
-  right: 10px;
 }
 
 /*# sourceMappingURL=Carousel.css.map */

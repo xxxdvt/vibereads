@@ -1,5 +1,13 @@
 @charset "UTF-8";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  width: 100%;
+}
+
 #root {
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Высота на 100% окна */

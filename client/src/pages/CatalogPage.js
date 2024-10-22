@@ -3,7 +3,9 @@ import MultiCarousel from "../containers/MultiCarousel";
 
 function CatalogPage() {
     return (
+        <div className="catalog-wrapper">
         <MultiCarousel />
+        </div>
     );
 }
 

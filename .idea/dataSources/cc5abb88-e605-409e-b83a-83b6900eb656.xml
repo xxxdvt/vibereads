@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>1813</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2427</IntrospectionStateNumber>
       <ServerVersion>17.0</ServerVersion>
-      <StartupTime>1728063205</StartupTime>
+      <StartupTime>1728940504</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -106,7 +106,7 @@ false America/Argentina/San_Luis
 false America/Argentina/Tucuman
 false America/Argentina/Ushuaia
 false America/Aruba
-false America/Asuncion
+true America/Asuncion
 false America/Atikokan
 true America/Atka
 false America/Bahia
@@ -258,7 +258,7 @@ true America/Yellowknife
 false Antarctica/Casey
 false Antarctica/Davis
 false Antarctica/DumontDUrville
-false Antarctica/Macquarie
+true Antarctica/Macquarie
 false Antarctica/Mawson
 true Antarctica/McMurdo
 false Antarctica/Palmer
@@ -379,29 +379,29 @@ false Atlantic/Reykjavik
 false Atlantic/South_Georgia
 false Atlantic/St_Helena
 false Atlantic/Stanley
-false Australia/ACT
-false Australia/Adelaide
+true Australia/ACT
+true Australia/Adelaide
 false Australia/Brisbane
-false Australia/Broken_Hill
-false Australia/Canberra
-false Australia/Currie
+true Australia/Broken_Hill
+true Australia/Canberra
+true Australia/Currie
 false Australia/Darwin
 false Australia/Eucla
-false Australia/Hobart
-false Australia/LHI
+true Australia/Hobart
+true Australia/LHI
 false Australia/Lindeman
-false Australia/Lord_Howe
-false Australia/Melbourne
-false Australia/NSW
+true Australia/Lord_Howe
+true Australia/Melbourne
+true Australia/NSW
 false Australia/North
 false Australia/Perth
 false Australia/Queensland
-false Australia/South
-false Australia/Sydney
-false Australia/Tasmania
-false Australia/Victoria
+true Australia/South
+true Australia/Sydney
+true Australia/Tasmania
+true Australia/Victoria
 false Australia/West
-false Australia/Yancowinna
+true Australia/Yancowinna
 true BDST
 false BDT
 false BNT
@@ -616,7 +616,7 @@ false KRAST
 false KRAT
 false KST
 false Kwajalein
-false LHDT
+true LHDT
 false LHST
 false LIGT
 false LINT
@@ -677,7 +677,7 @@ false PST
 true PST8PDT
 false PWT
 true PYST
-false PYT
+true PYT
 false Pacific/Apia
 true Pacific/Auckland
 false Pacific/Bougainville
@@ -704,7 +704,7 @@ false Pacific/Marquesas
 false Pacific/Midway
 false Pacific/Nauru
 false Pacific/Niue
-false Pacific/Norfolk
+true Pacific/Norfolk
 false Pacific/Noumea
 false Pacific/Pago_Pago
 false Pacific/Palau
@@ -801,7 +801,7 @@ false Zulu
 14650||10|C|G
 14650||-9223372036854775808|U|G
 14650||10|U|G</Grants>
-      <IntrospectionStateNumber>1813</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2427</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4223,8 +4223,8 @@ false Zulu
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1813</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-10-04.19:14:43</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>2427</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-10-18.20:30:27</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4234,16 +4234,30 @@ false Zulu
       <ObjectId>16403</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>806</StateNumber>
+      <StateNumber>2426</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="266" parent="264" name="books">
+    <sequence id="266" parent="264" name="users_id_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>16446</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>2018</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="267" parent="264" name="books">
       <ObjectId>16404</ObjectId>
-      <StateNumber>1812</StateNumber>
+      <StateNumber>2424</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="267" parent="266" name="id">
+    <table id="268" parent="264" name="users">
+      <ObjectId>16447</ObjectId>
+      <StateNumber>2018</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="269" parent="267" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;books_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4252,63 +4266,133 @@ false Zulu
       <SequenceId>16403</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="268" parent="266" name="title">
+    <column id="270" parent="267" name="title">
       <DasType>text|0s</DasType>
       <Position>2</Position>
       <StateNumber>806</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="269" parent="266" name="author">
+    <column id="271" parent="267" name="author">
       <DasType>text|0s</DasType>
       <Position>3</Position>
       <StateNumber>806</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="270" parent="266" name="description">
+    <column id="272" parent="267" name="description">
       <DasType>text|0s</DasType>
       <Position>4</Position>
       <StateNumber>806</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="271" parent="266" name="language">
+    <column id="273" parent="267" name="language">
       <DasType>text|0s</DasType>
       <Position>5</Position>
       <StateNumber>806</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="272" parent="266" name="published_date">
+    <column id="274" parent="267" name="published_date">
       <DasType>text|0s</DasType>
       <Position>6</Position>
       <StateNumber>806</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="273" parent="266" name="page_count">
+    <column id="275" parent="267" name="page_count">
       <DasType>integer|0s</DasType>
       <Position>7</Position>
       <StateNumber>806</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="274" parent="266" name="thumbnail">
+    <column id="276" parent="267" name="thumbnail">
       <DasType>text|0s</DasType>
       <Position>8</Position>
       <StateNumber>806</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="275" parent="266" name="books_pkey">
+    <index id="277" parent="267" name="books_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16410</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1812</StateNumber>
+      <StateNumber>2424</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="276" parent="266" name="books_pkey">
+    <key id="278" parent="267" name="books_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16411</ObjectId>
       <Primary>1</Primary>
       <StateNumber>806</StateNumber>
       <UnderlyingIndexId>16410</UnderlyingIndexId>
+    </key>
+    <column id="279" parent="268" name="id">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>2018</StateNumber>
+      <SequenceId>16446</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="280" parent="268" name="surname">
+      <DasType>varchar(100)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>2018</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="281" parent="268" name="name">
+      <DasType>varchar(100)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>2018</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="282" parent="268" name="username">
+      <DasType>varchar(100)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>2018</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="283" parent="268" name="password">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>2018</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="284" parent="268" name="users_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16453</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2018</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="285" parent="268" name="users_username_key">
+      <ColNames>username</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16455</ObjectId>
+      <StateNumber>2018</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="286" parent="268" name="users_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16454</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2018</StateNumber>
+      <UnderlyingIndexId>16453</UnderlyingIndexId>
+    </key>
+    <key id="287" parent="268" name="users_username_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16456</ObjectId>
+      <StateNumber>2018</StateNumber>
+      <UnderlyingIndexId>16455</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>
