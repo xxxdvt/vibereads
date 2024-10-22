@@ -14,6 +14,7 @@ login_manager.init_app(app)
 bcrypt = Bcrypt(app)
 CORS(app)  # Разрешаем запросы с фронтенда
 
+
 # Пример простого API-роута
 tmp = 0
 
