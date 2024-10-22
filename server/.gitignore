@@ -1,0 +1,6 @@
+# Flask/Python specific ignores
+__pycache__/
+*.pyc
+venv/
+.env
+cache/
