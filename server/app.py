@@ -12,7 +12,7 @@ app.secret_key = 'your_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 bcrypt = Bcrypt(app)
-CORS(app)  # Разрешаем запросы с фронтенда
+CORS(app, credentials=True)  # Разрешаем запросы с фронтенда
 
 
 # Пример простого API-роута
