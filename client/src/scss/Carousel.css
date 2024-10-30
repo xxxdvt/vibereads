@@ -1,18 +1,23 @@
+* {
+  font-family: Montserrat, sans-serif;
+}
+
 .carousel-container {
   font-family: Montserrat, sans-serif;
   margin: 0 auto 50px auto;
   position: relative;
   width: 90%;
 }
-.carousel-container .section-name-header {
-  font-size: 1.3em;
-  margin-bottom: 40px;
+
+.section-name-header {
+  font-size: 1.4em;
+  margin: 0 auto 40px auto;
   color: #1644c0;
   border-bottom: 1px #1644c0 solid;
 }
 
 .carousel {
-  width: 90%;
+  width: 100%;
   margin: auto;
   position: relative;
   transition: 1s;
@@ -32,7 +37,8 @@
   height: fit-content;
   margin: 0 auto;
 }
-.carousel .carousel-slide .book-info {
+
+.book-info {
   color: whitesmoke;
   text-align: center;
   position: relative;
@@ -40,14 +46,17 @@
   padding: 0;
   width: 100%;
 }
-.carousel .carousel-slide .book-info p {
+.book-info p {
   margin: 0;
+  width: 150px;
+  font-size: 0.8em;
+  word-wrap: break-word;
 }
-.carousel .carousel-slide .book-info .hn {
+.book-info .hn {
   font-weight: bold;
 }
-.carousel .carousel-slide .book-info .hn1 {
-  font-size: 0.8em;
+.book-info .hn1 {
+  font-size: 0.7em;
 }
 
 .carousel-button-wrapper {
@@ -70,6 +79,32 @@
 }
 .carousel-button-wrapper .carousel-button:hover {
   background-color: #070b68;
+}
+
+.grid--container-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 0 auto 50px auto;
+}
+.grid--container-wrapper .grid--container {
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 20px;
+}
+.grid--container-wrapper .grid--container .grid--container-elem {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.grid--container-wrapper .grid--container .grid--container-elem .grid--container-elem-img {
+  width: 150px;
+  height: 220px;
+}
+.grid--container-wrapper .load-more-books {
+  color: white;
 }
 
 /*# sourceMappingURL=Carousel.css.map */

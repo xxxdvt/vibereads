@@ -1,0 +1,83 @@
+@use 'variables' as v;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container-fav {
+  width: 160px;
+  height: 40px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.button-fav {
+  outline: none;
+  height: 40px;
+  width: 160px;
+  text-align: center;
+  border-radius: 40px;
+  background: '#fff';
+  border: 2px solid v.$btn-bg;
+  color: v.$btn-bg;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font: {
+    size: 14px;
+    weight: 500;
+  }
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: scale(1.05) ;
+  }
+
+  &:active {
+    //letter-spacing: 2px;
+    letter-spacing: 2px;
+  }
+
+  &:after {
+    content: "В избранное";
+  }
+}
+
+.clicked {
+  width: 40px;
+  border-color: v.$gray;
+  border-width: 3px;
+  font-size: 0;
+  border-left-color: v.$btn-bg;
+  animation: rotating 2s 0.25s linear infinite;
+
+  &:after {
+    content: "";
+  }
+
+  &:hover {
+    color: v.$btn-bg;
+    background: white;
+  }
+}
+
+.validate {
+  font-size: 13px;
+  color: white;
+  background: v.$btn-bg;
+
+  &:after {
+    content: "❤️";
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

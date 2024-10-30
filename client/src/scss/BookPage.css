@@ -1,0 +1,74 @@
+.book-page-wrapper {
+  flex: 1;
+  height: 90%;
+  color: white;
+  width: 85%;
+  margin: 0 auto;
+}
+.book-page-wrapper .book-grid-column-container {
+  display: grid;
+  margin-left: 50px;
+  margin-top: 50px;
+  grid-column-gap: 75px;
+  grid-template-columns: fit-content(100%) 2.5fr;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-fav-rate-img {
+  display: grid;
+  grid-template-rows: 1fr 0.1fr 0.1fr;
+  grid-row-gap: 20px;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-fav-rate-img .book-info-img {
+  width: 200px;
+  height: 300px;
+}
+.book-page-wrapper .book-grid-column-container .rating-book {
+  width: fit-content;
+  align-items: center;
+  margin: 0 auto;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info .book-grid-title {
+  margin-bottom: 10px;
+  font-size: 2em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  word-wrap: break-word;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info .book-grid-author {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info .read-online {
+  width: fit-content;
+  margin-top: 130px;
+  font-size: 1.5em;
+  transition: 0.7s;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info .read-online:hover {
+  letter-spacing: 2px;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info .read-online:after {
+  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+.book-page-wrapper .book-grid-column-container .book-grid-row-info .read-online:hover:after {
+  backface-visibility: hidden;
+  border-color: white;
+  transition: width 350ms ease-in-out;
+  width: 90%;
+}
+
+/*# sourceMappingURL=BookPage.css.map */

@@ -1,20 +1,20 @@
 @use 'variables' as v;
+* {
+  font-family: Montserrat, sans-serif;
 
+}
 .carousel-container {
   font-family: Montserrat, sans-serif;
   margin: 0 auto 50px auto;
   position: relative;
   width: 90%;
-
-
-  .section-name-header {
-    font-size: 1.3em;
-    margin-bottom: 40px;
-    color: v.$primary;
-    border-bottom: 1px v.$primary solid;
-  }
 }
-
+.section-name-header {
+  font-size: 1.4em;
+  margin: 0 auto 40px auto;
+  color: v.$primary;
+  border-bottom: 1px v.$primary solid;
+}
 .carousel {
   width: v.$carousel-width;
   margin: auto;
@@ -38,29 +38,32 @@
       margin: 0 auto;
     }
 
-    .book-info {
-      p {
-        margin: 0;
-      }
 
-      .hn {
-        font-weight: bold;
-      }
-
-      .hn1 {
-        font-size: 0.8em;
-      }
-
-      color: whitesmoke;
-      text-align: center;
-      position: relative;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
   }
 }
+.book-info {
+  p {
+    margin: 0;
+    width: 150px;
+    font-size: 0.8em;
+    word-wrap: break-word;
+  }
 
+  .hn {
+    font-weight: bold;
+  }
+
+  .hn1 {
+    font-size: 0.7em;
+  }
+
+  color: whitesmoke;
+  text-align: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 //
 .carousel-button-wrapper {
   display: flex;
@@ -82,5 +85,33 @@
     &:hover {
       background-color: lighten(v.$background, 10%);
     }
+  }
+}
+.grid--container-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 0 auto 50px auto;
+  .grid--container {
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 20px;
+
+    .grid--container-elem {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+
+      .grid--container-elem-img {
+        width: 150px;
+        height: 220px;
+      }
+    }
+  }
+  .load-more-books {
+    color: white;
+
   }
 }

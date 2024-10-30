@@ -29,19 +29,19 @@ function AboutPage() {
                             </h2>
                             <p className="text-base text-blue-500">Мы — команда, которая верит в силу чтения. Наша библиотека помогает находить книги по настроению, открывая новые эмоции и вдохновение. Погрузитесь в удивительные истории!</p>
                             <div className="mt-10 flex flex-col items-center md:flex-row">
-                                <a href="https://github.com/xxxdvt" target="_blank"
+                                <a href="https://github.com/xxxdvt" target="_blank" rel="noreferrer"
                                    className="mb-3 inline-flex h-12 w-full items-center justify-center rounded font-medium tracking-wide text-white shadow-md transition md:mr-4 md:mb-0 md:w-auto">
                                     <img src={ghl} alt="" className="w-12"/>
                                 </a>
-                                <a href="https://t.me/r01ton" target="_blank"
+                                <a href="https://t.me/r01ton" target="_blank" rel="noreferrer"
                                    className="mb-3 inline-flex h-12 w-full items-center justify-center rounded font-medium tracking-wide text-white shadow-md transition md:mr-4 md:mb-0 md:w-auto">
                                     <img src={tgl} alt="" className="w-12"/>
                                 </a>
-                                <a href="https://vk.com/ro1t0n" target="_blank"
+                                <a href="https://vk.com/ro1t0n" target="_blank" rel="noreferrer"
                                    className="mb-3 inline-flex h-12 w-full items-center justify-center rounded font-medium tracking-wide text-white shadow-md transition md:mr-4 md:mb-0 md:w-auto">
                                     <img src={vkl} alt="" className="w-12"/>
                                 </a>
-                                <a href="mailto:davit.mushkambaryan@gmail.com" target="_blank"
+                                <a href="mailto:davit.mushkambaryan@gmail.com" target="_blank" rel="noreferrer"
                                    className="mb-3 inline-flex h-12 w-full items-center justify-center rounded font-medium tracking-wide text-white shadow-md transition md:mr-4 md:mb-0 md:w-auto">
                                     <img src={gml} alt="" className="w-12"/>
                                 </a>
@@ -59,7 +59,7 @@ function AboutPage() {
                         </svg>
                         <div
                             className="abg-orange-400 mx-auto w-96 h-96 overflow-hidden rounded-[6rem] rounded-br-none rounded-tl-none">
-                            <img src={contact}/>
+                            <img src={contact} alt="Contact"/>
                         </div>
                     </div>
                 </div>

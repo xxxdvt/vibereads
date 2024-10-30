@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CatalogPage from "./pages/CatalogPage";
 import AboutPage from "./pages/AboutPage";
+import BookPage from "./pages/BookPage";
 
 function Main() {
     return (
@@ -22,6 +23,7 @@ function Main() {
                 <Route path='/login' element={<LoginPage/>}/>
                 <Route path='/register' element={<RegisterPage/>}/>
                 <Route path='/catalog' element={<CatalogPage/>}/>
+                <Route path="/books/:bookId" element={<BookPage />} />
                 <Route path='/about' element={<AboutPage/>}/>
                 <Route path='/profile' element={<ProfilePage/>}/>
                 <Route path='/mood-search' element={<MoodSearchPage/>}/>
