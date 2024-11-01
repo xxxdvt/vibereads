@@ -1,8 +1,10 @@
-  @use 'variables' as v;
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+@use 'variables' as v;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap');
+
 .login-wrapper {
   height: 90%;
   flex: 1;
+
   .login-container {
     background: #fff;
     font-family: Montserrat, sans-serif;

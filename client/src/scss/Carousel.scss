@@ -32,25 +32,38 @@
   .carousel-slide {
     transition: 1s;
 
-    img {
-      width: 150px;
-      height: fit-content;
-      margin: 0 auto;
-    }
+
 
 
   }
 }
 .book-info {
+  transition: 1s;
+
+
   p {
     margin: 0;
     width: 150px;
     font-size: 0.8em;
     word-wrap: break-word;
+    transition: 1s;
+
   }
 
   .hn {
     font-weight: bold;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    transition: 1s;
+
+  }
+  .hn:hover {
+    -webkit-line-clamp: unset; /* Remove line clamp */
+    max-height: none; /* Allow full height on hover */
+    transition: 1s;
+
   }
 
   .hn1 {
@@ -114,4 +127,9 @@
     color: white;
 
   }
+}
+
+.grid--container-elem-img-p {
+  width: 180px;
+  height: 250px;
 }

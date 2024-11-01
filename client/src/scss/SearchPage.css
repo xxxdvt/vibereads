@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap");
+.search-page-wrapper {
+  flex: 1;
+  height: 90%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.search-bar-bar {
+  width: 50%;
+  height: fit-content;
+}
+
+/*# sourceMappingURL=SearchPage.css.map */

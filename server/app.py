@@ -15,10 +15,18 @@ bcrypt = Bcrypt(app)
 CORS(app, credentials=True)
 
 
+def get_16_most_popular():
+    conn = connect.get_connection_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT get_16_most_popular()")
+    ids = cursor.fetchall()
+    conn.close()
+    return ids[0][0]
+
+
 @app.route('/api/books', methods=['GET'])
 def get_books():
     page = int(request.args.get('page', 1))
-
     cache_conn = connect.get_cache_db()
     collection = cache_conn['books_cache']
     books = []
@@ -29,12 +37,31 @@ def get_books():
             {
                 'title': elem['title'],
                 'author': elem['author'],
-                'rating': '4.8/5',
+                'rating': str(elem['rating']),
                 'thumbnail': elem['cover']
             }
         )
+    return jsonify(books)
 
-    # print(books)
+
+@app.route('/api/books/popular', methods=['GET'])
+def get_popular():
+    ids = get_16_most_popular()
+    print(ids)
+    cache_conn = connect.get_cache_db()
+    collection = cache_conn['books_cache']
+    books = []
+    for cur_id in ids:
+        book = collection.find_one({"_id": cur_id})
+        books.append(
+            {
+                'title': book['title'],
+                'author': book['author'],
+                'rating': str(book['rating']),
+                'thumbnail': book['cover']
+            }
+        )
+
     return jsonify(books)
 
 
@@ -51,6 +78,24 @@ def get_curr_book(book_id):
         'thumbnail': cur_book['cover'],
         'text': cur_book['text']
     })
+
+
+@app.route('/api/books/rating/<int:book_id>/<int:rate>', methods=['POST'])
+def add_or_change_rating(book_id, rate):
+    cache_conn = connect.get_cache_db()
+    collection = cache_conn['books_cache']
+    conn = connect.get_connection_db()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO ratings (user_id, book_id, rating) VALUES (1, %s, %s)", (book_id, rate))
+    conn.commit()
+    cursor.execute("SELECT calculate_rating(%s)", [book_id])
+    curr_rating = cursor.fetchone()
+    collection.update_one(
+        {"_id": book_id},
+        {"$set": {"rating": curr_rating}}
+    )
+    conn.close()
+
 
 
 if __name__ == '__main__':

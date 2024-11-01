@@ -14,11 +14,12 @@ function BookPage(props) {
             const data = await response.json();
             setBookInfo(data);
         }
-        fetchBookInfo();
+        fetchBookInfo().then();
     }, [bookId])
     function handleChangeRating(event, newValue) {
         setValue(newValue);
         console.log(newValue);
+
     }
 
     const [value, setValue] = React.useState(null);
