@@ -20,8 +20,8 @@
   text-align: center;
   border-radius: 40px;
   background: '#fff';
-  border: 2px solid v.$btn-bg;
-  color: v.$btn-bg;
+  border: 2px solid var(--btn-bg);
+  color: var(--btn-bg);
   letter-spacing: 1px;
   text-shadow: 0;
   font: {
@@ -47,10 +47,10 @@
 
 .clicked {
   width: 40px;
-  border-color: v.$gray;
+  border-color: var(--gray);
   border-width: 3px;
   font-size: 0;
-  border-left-color: v.$btn-bg;
+  border-left-color: var(--btn-bg);
   animation: rotating 2s 0.25s linear infinite;
 
   &:after {
@@ -58,7 +58,7 @@
   }
 
   &:hover {
-    color: v.$btn-bg;
+    color: var(--btn-bg);
     background: white;
   }
 }
@@ -66,7 +66,7 @@
 .validate {
   font-size: 13px;
   color: white;
-  background: v.$btn-bg;
+  background: var(--btn-bg);
 
   &:after {
     content: "❤️";

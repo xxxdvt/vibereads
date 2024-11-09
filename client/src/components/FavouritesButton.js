@@ -7,7 +7,7 @@ const AnimatedButton = () => {
     const handleClick = () => {
         if (buttonState === "button-fav") {
             setButtonState("button-fav clicked");
-            setBgColor("#040638");
+            setBgColor("transparent");
             setTimeout(() => {
                 setButtonState("button-fav validate");
                 setBgColor("#0a36a9");
@@ -15,7 +15,7 @@ const AnimatedButton = () => {
         } else if (buttonState === "button-fav validate") {
 
             setButtonState("button-fav clicked");
-            setBgColor("#040638");
+            setBgColor("transparent");
 
             setTimeout(() => {
                 setButtonState("button-fav");

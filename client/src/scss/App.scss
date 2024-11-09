@@ -27,15 +27,15 @@ main {
   .adv-content-text {
     width: 100%;
     text-align: center;
-    color: v.$text-color;
+    color: var(--text-color);
   }
 }
 
 .adv-content-btn {
   font-size: 1.1em;
   font-family: 'Montserrat', sans-serif;
-  color: v.$text-color;
-  background-color: v.$background;
+  color: var(--text-color);
+  background-color: none;
   border: none;
   cursor: pointer;
   font-weight: 400;
@@ -80,7 +80,7 @@ main {
 .adv-content-btn:hover:after,
 .adv-content-btn:hover:before {
   backface-visibility: hidden;
-  border-color: v.$text-color;
+  border-color: var(--text-color);
   transition: width 350ms ease-in-out;
   width: 90%;
 }

@@ -1,12 +1,11 @@
 import React from 'react';
 import '../scss/SearchPage.css';
+import Search from '../containers/Search.js';
 
 function SearchPage(props) {
     return (
         <div className='search-page-wrapper'>
-            <div className="search-bar-bar">
-
-            </div>
+            <Search />
         </div>
     );
 }

@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+$curRoot: true;
+
 html {
   width: 100%;
 }
@@ -12,7 +14,11 @@ html {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Высота на 100% окна */
-  background: v.$background
+  //@if $curRoot == false {
+  //  background: v.$background
+  //} @else {
+    background: radial-gradient(circle, var(--bg1) 40%, var(--background) 100%);
+  //}
 }
 
 body {

@@ -3,7 +3,7 @@
 .book-page-wrapper {
   flex: 1;
   height: 90%;
-  color: white;
+  color: var(--rotating-color);
   width: 85%;
   margin: 0 auto;
 
@@ -65,7 +65,7 @@
 
       .read-online:after {
         backface-visibility: hidden;
-        border: 1px solid rgba(#fff, 0);
+        border: 1px solid var(--rotating-color);
         bottom: 0;
         content: " ";
         display: block;
@@ -77,7 +77,7 @@
 
       .read-online:hover:after {
         backface-visibility: hidden;
-        border-color: white;
+        border-color: var(--rotating-color);
         transition: width 350ms ease-in-out;
         width: 90%;
       }

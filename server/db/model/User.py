@@ -8,3 +8,6 @@ class User(UserMixin):
         self.name = name
         self.username = username
         self.password = password
+
+    def get_id(self):
+        return str(self.id)

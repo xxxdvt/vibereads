@@ -1,5 +1,31 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap");
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+
+[data-theme=light] {
+  --text: #1a1a1a;
+  --background: #b0aeae;
+  --primary: #1841be;
+  --secondary: #7195ff;
+  --accent: rgba(135, 169, 255, 0.89);
+  --text-color: #0056cc;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
 * {
   font-family: "Montserrat", sans-serif;
 }
@@ -18,8 +44,8 @@
   text-align: center;
   border-radius: 40px;
   background: "#fff";
-  border: 2px solid #0a36a9;
-  color: #0a36a9;
+  border: 2px solid var(--btn-bg);
+  color: var(--btn-bg);
   letter-spacing: 1px;
   text-shadow: 0;
   font-size: 14px;
@@ -39,24 +65,24 @@
 
 .clicked {
   width: 40px;
-  border-color: #f8f8f8;
+  border-color: var(--gray);
   border-width: 3px;
   font-size: 0;
-  border-left-color: #0a36a9;
+  border-left-color: var(--btn-bg);
   animation: rotating 2s 0.25s linear infinite;
 }
 .clicked:after {
   content: "";
 }
 .clicked:hover {
-  color: #0a36a9;
+  color: var(--btn-bg);
   background: white;
 }
 
 .validate {
   font-size: 13px;
   color: white;
-  background: #0a36a9;
+  background: var(--btn-bg);
 }
 .validate:after {
   content: "❤️";

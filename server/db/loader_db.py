@@ -39,7 +39,6 @@ while url and current_page <= max_pages:  # Пока существует ссы
                 "cover": f'https://www.gutenberg.org/cache/epub/{book_id}/pg{book_id}.cover.medium.jpg',
                 "text": f'https://www.gutenberg.org/cache/epub/{book_id}/pg{book_id}-images.html',
                 "rating": 0,
-                "subjects": subjects
             }
             collection.insert_one(book_example)
             print(f"ID: {book_id}\nTitle: {title}\nAuthor(s): {author_names}\n")

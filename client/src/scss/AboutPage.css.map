@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["AboutPage.scss"],"names":[],"mappings":"AACQ;AACR;EACE;EACA;EACA","file":"AboutPage.css"}
+{"version":3,"sourceRoot":"","sources":["AboutPage.scss","_variables.scss"],"names":[],"mappings":"AACQ;ACDR;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;ADrBF;EACE;EACA;EACA","file":"AboutPage.css"}

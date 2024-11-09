@@ -1,17 +1,30 @@
-$text: #07090e;
-$background: #040638;
-$primary: #1644c0;
-$secondary: #86a4ee;
-$accent: #adc3fc;
-$text-color: #1771F1;
-
-
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+//--background: #040638;
+[data-theme='light'] {
+  --text: #1a1a1a;          // Темный цвет текста для хорошей читаемости на светлом фоне
+  --background: #b0aeae;    // Светлый, нейтральный фон
+  --primary: #1841be;       // Более яркий синий, аналогичный темному варианту, но с повышенной яркостью
+  --secondary: #7195ff;     // Умеренно светлый оттенок синего для второстепенных элементов
+  --accent: rgba(135, 169, 255, 0.89);        // Светлый акцентный цвет с лёгким голубым оттенком
+  --text-color: #0056cc;    // Яркий и контрастный синий для ссылок и акцентированного текста
+  --btn-bg: #003da5;        // Темно-синий для кнопок, чтобы оставаться выделяющимся на светлом фоне
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
 
 $carousel-width: 100%;
 $carousel-height: 600px;
 $button-color: #fff;
 $button-size: 30px;
-
-
-$btn-bg: #0a36a9;
-$gray: #f8f8f8;

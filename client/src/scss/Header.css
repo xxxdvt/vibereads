@@ -1,4 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap");
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+
+[data-theme=light] {
+  --text: #1a1a1a;
+  --background: #b0aeae;
+  --primary: #1841be;
+  --secondary: #7195ff;
+  --accent: rgba(135, 169, 255, 0.89);
+  --text-color: #0056cc;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
 header {
   z-index: 10;
   width: 100%;
@@ -18,7 +44,7 @@ header nav {
 header nav .app-name {
   font-size: 2.3em;
   font-weight: 600;
-  background-image: linear-gradient(90deg, #1644c0 0%, #86a4ee 40%, #adc3fc 60%);
+  background-image: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 40%, var(--accent) 60%);
   color: transparent;
   background-clip: text;
   margin: 0 0 0 1em;
@@ -34,7 +60,7 @@ header nav .btn-wrapper p {
   text-align: end;
   margin: 0;
   font-size: 1.1em;
-  color: #1771F1;
+  color: var(--text-color);
   transition: 0.7s;
 }
 header nav .btn-wrapper p:hover {
@@ -53,7 +79,7 @@ header nav .btn-wrapper p:after {
 }
 header nav .btn-wrapper p:hover:after {
   backface-visibility: hidden;
-  border-color: #1771F1;
+  border-color: var(--text-color);
   transition: width 350ms ease-in-out;
   width: 90%;
 }

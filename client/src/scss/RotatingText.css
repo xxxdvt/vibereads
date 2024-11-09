@@ -3,7 +3,7 @@
   font-family: Montserrat, sans-serif;
   font-weight: 500;
   font-size: 2.2em;
-  color: white;
+  color: var(--rotating-color);
   transform: translateX(-23%);
 }
 .rotating-text p {

@@ -1,5 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bad+Script&family=Neucha&display=swap");
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+
+[data-theme=light] {
+  --text: #1a1a1a;
+  --background: #b0aeae;
+  --primary: #1841be;
+  --secondary: #7195ff;
+  --accent: rgba(135, 169, 255, 0.89);
+  --text-color: #0056cc;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
 html {
   scrollbar-width: none;
 }
@@ -25,14 +51,14 @@ main {
 .adv-content .adv-content-text {
   width: 100%;
   text-align: center;
-  color: #1771F1;
+  color: var(--text-color);
 }
 
 .adv-content-btn {
   font-size: 1.1em;
   font-family: "Montserrat", sans-serif;
-  color: #1771F1;
-  background-color: #040638;
+  color: var(--text-color);
+  background-color: none;
   border: none;
   cursor: pointer;
   font-weight: 400;
@@ -74,7 +100,7 @@ main {
 .adv-content-btn:hover:after,
 .adv-content-btn:hover:before {
   backface-visibility: hidden;
-  border-color: #1771F1;
+  border-color: var(--text-color);
   transition: width 350ms ease-in-out;
   width: 90%;
 }

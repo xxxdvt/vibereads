@@ -1,4 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap");
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+
+[data-theme=light] {
+  --text: #1a1a1a;
+  --background: #b0aeae;
+  --primary: #1841be;
+  --secondary: #7195ff;
+  --accent: rgba(135, 169, 255, 0.89);
+  --text-color: #0056cc;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
 .wrapper-about {
   font-family: "Montserrat", sans-serif;
   height: 90%;

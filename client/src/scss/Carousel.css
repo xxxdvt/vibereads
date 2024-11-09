@@ -1,3 +1,29 @@
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+
+[data-theme=light] {
+  --text: #1a1a1a;
+  --background: #b0aeae;
+  --primary: #1841be;
+  --secondary: #7195ff;
+  --accent: rgba(135, 169, 255, 0.89);
+  --text-color: #0056cc;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
 * {
   font-family: Montserrat, sans-serif;
 }
@@ -12,8 +38,8 @@
 .section-name-header {
   font-size: 1.4em;
   margin: 0 auto 40px auto;
-  color: #1644c0;
-  border-bottom: 1px #1644c0 solid;
+  color: var(--primary);
+  border-bottom: 1px var(--primary) solid;
 }
 
 .carousel {
@@ -35,7 +61,7 @@
 
 .book-info {
   transition: 1s;
-  color: whitesmoke;
+  color: var(--rotating-color);
   text-align: center;
   position: relative;
   margin: 0;
@@ -72,7 +98,7 @@
   align-items: center;
 }
 .carousel-button-wrapper .carousel-button {
-  background-color: #040638;
+  background-color: var(--background);
   border: none;
   color: #fff;
   cursor: pointer;
@@ -85,7 +111,7 @@
   z-index: 10;
 }
 .carousel-button-wrapper .carousel-button:hover {
-  background-color: #070b68;
+  background-color: #ffe545;
 }
 
 .grid--container-wrapper {
@@ -94,7 +120,7 @@
   margin: 0 auto 50px auto;
 }
 .grid--container-wrapper .grid--container {
-  color: white;
+  color: var(--rotating-color);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 20px;

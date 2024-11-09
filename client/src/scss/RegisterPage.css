@@ -1,4 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap");
+:root {
+  --text: #07090e;
+  --background: rgba(11, 2, 54, 1);
+  --primary: #1644c0;
+  --secondary: #86a4ee;
+  --accent: #adc3fc;
+  --text-color: #1771F1;
+  --btn-bg: #0a36a9;
+  --gray: #f8f8f8;
+  --rotating-color: #f1f1f1;
+  --bg1: rgba(31, 14, 150, 1);
+}
+
+[data-theme=light] {
+  --text: #1a1a1a;
+  --background: #b0aeae;
+  --primary: #1841be;
+  --secondary: #7195ff;
+  --accent: rgba(135, 169, 255, 0.89);
+  --text-color: #0056cc;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
 .register-wrapper {
   height: 90%;
   flex: 1;
@@ -28,7 +54,7 @@
   left: 0;
   bottom: 2px;
   border-radius: 5px;
-  background: linear-gradient(to right, #1644c0 0%, #86a4ee 100%);
+  background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
 }
 .register-wrapper .register-container form .register-input-box {
   width: 100%;
@@ -61,7 +87,7 @@
   position: absolute;
   height: 2px;
   width: 100%;
-  background: linear-gradient(to right, #1644c0 0%, #86a4ee 100%);
+  background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
   left: 0;
   bottom: 0;
   transform: scaleX(0);
@@ -73,7 +99,7 @@
 }
 .register-wrapper .register-container .register-input-box input[type=submit] {
   font-family: Montserrat, sans-serif;
-  background: linear-gradient(to right, #1644c0 0%, #86a4ee 100%);
+  background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
   font-size: 17px;
   color: #fff;
   border-radius: 5px;
@@ -83,7 +109,7 @@
 }
 .register-wrapper .register-container .register-input-box input[type=submit]:hover {
   letter-spacing: 2px;
-  background: linear-gradient(to left, #1644c0 0%, #86a4ee 100%);
+  background: linear-gradient(to left, var(--primary) 0%, var(--secondary) 100%);
 }
 .register-wrapper .register-container .register-alternative {
   font-size: 0.9em;
@@ -91,7 +117,7 @@
   text-decoration: none;
 }
 .register-wrapper .register-container .register-alternative:-webkit-any-link {
-  text-decoration-color: #1644c0;
+  text-decoration-color: var(--primary);
 }
 .register-wrapper input, .register-wrapper input::placeholder {
   font-family: Montserrat, sans-serif;

@@ -3,6 +3,7 @@
   font-family: Montserrat, sans-serif;
 
 }
+$bg-cl: var(--background);
 .carousel-container {
   font-family: Montserrat, sans-serif;
   margin: 0 auto 50px auto;
@@ -12,8 +13,8 @@
 .section-name-header {
   font-size: 1.4em;
   margin: 0 auto 40px auto;
-  color: v.$primary;
-  border-bottom: 1px v.$primary solid;
+  color: var(--primary);
+  border-bottom: 1px var(--primary) solid;
 }
 .carousel {
   width: v.$carousel-width;
@@ -70,7 +71,7 @@
     font-size: 0.7em;
   }
 
-  color: whitesmoke;
+  color: var(--rotating-color);
   text-align: center;
   position: relative;
   margin: 0;
@@ -83,7 +84,7 @@
   justify-content: center;
   align-items: center;
   .carousel-button {
-    background-color: v.$background;
+    background-color: var(--background);
     border: none;
     color: v.$button-color;
     cursor: pointer;
@@ -96,7 +97,7 @@
     z-index: 10;
 
     &:hover {
-      background-color: lighten(v.$background, 10%);
+      background-color: lighten(#ffde12, 10%);
     }
   }
 }
@@ -104,8 +105,9 @@
   position: relative;
   width: 90%;
   margin: 0 auto 50px auto;
+
   .grid--container {
-    color: white;
+    color: var(--rotating-color);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-row-gap: 20px;

@@ -7,7 +7,7 @@ footer {
   bottom: 0;
   text-align: center;
   margin-bottom: 0.5%;
-  color: white;
+  color: var(--rotating-color);
 }
 footer .heart {
   content: "❤️";
