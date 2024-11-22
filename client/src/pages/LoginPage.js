@@ -1,29 +1,36 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../scss/LoginPage.css';
 import {Link, useNavigate} from "react-router-dom";
+import {AuthContext} from "../context/AuthContext";
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         console.log(username, password);
-        const response = await fetch("http://127.0.0.1:5000/api/login", {
+        await fetch("http://127.0.0.1:5000/api/login", {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, password }),
-        });
+            body: JSON.stringify({username, password}),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (data) {
+                    // Авторизуем пользователя в контексте
+                    login(data);
+                    navigate('/profile');
 
-        if (response.ok) {
-            navigate('/profile');
-        } else {
-            alert('Ошибка входа, проверьте логин и пароль');
-        }
+                }
+            });
+
     }
 
     return (

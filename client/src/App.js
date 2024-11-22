@@ -7,7 +7,6 @@ function App() {
 
     return (
         <main>
-
             <div className="adv-content">
                 <RotatingText/>
                 <button className="adv-content-btn">Попробовать</button>

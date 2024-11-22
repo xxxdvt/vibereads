@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../scss/RegisterPage.css';
 import {Link, useNavigate} from "react-router-dom";
+import {AuthContext} from "../context/AuthContext";
 
 function RegisterPage() {
     const [name, setName] = useState('');
@@ -9,23 +10,30 @@ function RegisterPage() {
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleRegister = async (e) => {
         e.preventDefault();
         console.log(username, password);
-        const response = await fetch("http://127.0.0.1:5000/api/register", {
+        await fetch("http://127.0.0.1:5000/api/register", {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ surname, name, username, password, passwordCheck }),
-        });
-
-        if (response.ok) {
-            navigate('/profile');
-        } else {
-            alert('Ошибка входа, проверьте логин и пароль');
-        }
+            body: JSON.stringify({surname, name, username, password, passwordCheck}),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    // Авторизуем пользователя в контексте
+                    login(data);
+                    navigate('/profile');
+                }
+            })
+            .catch(err => {
+                alert("Check your Login and Password")
+            })
     }
     return (
         <div className='register-wrapper'>

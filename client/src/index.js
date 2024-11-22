@@ -15,26 +15,30 @@ import BookPage from "./pages/BookPage";
 import SearchPage from "./pages/SearchPage";
 import MoodPage from "./pages/MoodPage";
 import ThemeProvider from "./providers/ThemeProvider";
-import app from "./App";
+import {AuthProvider} from "./context/AuthContext";
+import FavouritesPage from "./pages/FavouritesPage";
 
 
 function Main() {
     return (
         <Router>
             <ThemeProvider>
-            <Header/>
-            <Routes>
-                <Route path='/' element={<App/>}/>
-                <Route path='/login' element={<LoginPage/>}/>
-                <Route path='/register' element={<RegisterPage/>}/>
-                <Route path='/catalog' element={<CatalogPage/>}/>
-                <Route path='/search' element={<SearchPage/>}></Route>
-                <Route path="/books/:bookId" element={<BookPage/>}/>
-                <Route path='/about' element={<AboutPage/>}/>
-                <Route path='/profile' element={<ProfilePage/>}/>
-                <Route path='/moody' element={<MoodPage/>}/>
-            </Routes>
-            <Footer/>
+                <AuthProvider>
+                    <Header/>
+                    <Routes>
+                        <Route path='/' element={<App/>}/>
+                        <Route path='/login' element={<LoginPage/>}/>
+                        <Route path='/register' element={<RegisterPage/>}/>
+                        <Route path='/catalog' element={<CatalogPage/>}/>
+                        <Route path='/search' element={<SearchPage/>}></Route>
+                        <Route path="/books/:bookId" element={<BookPage/>}/>
+                        <Route path='/about' element={<AboutPage/>}/>
+                        <Route path='/profile' element={<ProfilePage/>}/>
+                        <Route path='/moody' element={<MoodPage/>}/>
+                        <Route path='/user/favourites' element={<FavouritesPage/>}/>
+                    </Routes>
+                    <Footer/>
+                </AuthProvider>
             </ThemeProvider>
         </Router>
     );

@@ -9,9 +9,26 @@ const Search = () => {
     const [autocompleteResults, setAutocompleteResults] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const navigate = useNavigate();
-    const handleBookClick = (event) => {
+    async function checkUserLogin() {
+        const response = await fetch('http://127.0.0.1:5000/api/current_user', {
+            "method": "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        const data = await response.json();
+        return data['message'] !== 'UNAUTHORIZED';
+
+    }
+
+    const handleBookClick = async (event) => {
         const clickedId = parseInt(event.target.src.toString().split('/')[5]);
-        navigate(`/books/${clickedId}`);
+        if (await checkUserLogin()) {
+            navigate(`/books/${clickedId}`);
+        } else {
+            alert('Login first')
+        }
     }
     // Автозаполнение при каждом изменении текста
     const handleInputChange = debounce(async (newQuery) => {
@@ -76,7 +93,7 @@ const Search = () => {
             <div className='grid--container-search'>
                 {autocompleteResults.map((book, index) => (
                     <div className="grid--container-search-elem" key={index}>
-                        <img src={book["thumbnail"]} alt={book.title} className="grid--container-search-elem-img"
+                        <img src={book["cover"]} alt={book.title} className="grid--container-search-elem-img"
                              onClick={handleBookClick}/>
                         <div className="search-book-info">
                             <p className='search-hn'>{book.title}</p>

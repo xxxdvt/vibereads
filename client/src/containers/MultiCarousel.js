@@ -78,9 +78,27 @@ const MultiCarousel = () => {
         }
     };
 
-    function handleClickBookInfo(event) {
+
+    async function checkUserLogin() {
+        const response = await fetch('http://127.0.0.1:5000/api/current_user', {
+            "method": "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        const data = await response.json();
+        return data['message'] !== 'UNAUTHORIZED';
+
+    }
+
+    async function handleClickBookInfo(event) {
         const clickedId = parseInt(event.target.src.toString().split('/')[5]);
-        navigate(`/books/${clickedId}`);
+        if (await checkUserLogin()) {
+            navigate(`/books/${clickedId}`);
+        } else {
+            alert('Login first')
+        }
     }
 
     useEffect(() => {

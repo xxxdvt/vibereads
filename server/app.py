@@ -9,14 +9,15 @@ from flask_bcrypt import Bcrypt
 from db.connection import connect
 from db.connection.connect import get_connection_db
 from db.model.User import User
-from tags import get_books_by_mood
+# from tags import get_books_by_mood
 from get_gutenberg_id import get_gutenberg_id
+from tags import get_books_by_mood
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 app.config['SESSION_COOKIE_HTTPONLY'] = False
+app.config['SESSION_SAMESITE'] = 'None'
 app.config['SESSION_COOKIE_DOMAIN'] = '127.0.0.1'
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -54,9 +55,13 @@ def register():
         user_id = cur.fetchone()[0]
         conn.commit()
 
-
         login_user(User(id=user_id, surname=surname, name=name, username=username, password=hashed_password))
-    return jsonify({"message": "User registered successfully"}), 201
+    return jsonify({
+        "id": current_user.id,
+        "surname": current_user.surname,
+        "name": current_user.name,
+        "username": current_user.username,
+    }), 200
 
 
 @app.route('/api/login', methods=['POST'])
@@ -70,12 +75,14 @@ def login():
         cur.execute("SELECT id, surname, name, username, password FROM users WHERE username = %s", (username,))
         user = cur.fetchone()
         if user and bcrypt.check_password_hash(user[4], password):
-            print(load_user(user[0]))
-
             login_user(User(id=user[0], surname=user[1], name=user[2], username=user[3], password=user[4]))
-            print(flask_login.current_user)
-            session.permanent = True
-            return jsonify({"message": "Login successful"}), 200
+            # session.permanent = True
+            return jsonify({
+                "id": current_user.id,
+                "surname": current_user.surname,
+                "name": current_user.name,
+                "username": current_user.username,
+            }), 200
     return jsonify({"message": "Invalid credentials"}), 401
 
 
@@ -101,9 +108,11 @@ def get_current_user():
             "id": current_user.id,
             "surname": current_user.surname,
             "name": current_user.name,
-            "username": current_user.username
+            "username": current_user.username,
         }), 200
-    return jsonify({"message": "No user logged in"}), 401
+    return jsonify({
+        "message": "UNAUTHORIZED"
+    }), 200
 
 
 def get_16_most_popular():
@@ -171,14 +180,43 @@ def get_curr_book(book_id):
     })
 
 
-@app.route('/api/books/rating/<int:book_id>/<int:rate>', methods=['POST'])
+@app.route('/api/books/rating/<int:book_id>', methods=['GET'])
+def get_rating_if_exists(book_id):
+    conn = get_connection_db()
+    cursor = conn.cursor()
+    cur_user_id = current_user.id
+    cursor.execute("SELECT user_id, book_id, rating FROM ratings WHERE (user_id = %s) AND (book_id = %s)",
+                   (cur_user_id, book_id))
+    info = cursor.fetchone()
+    if info is None:
+        print("No rating")
+        return jsonify({"message": "rating does not exist"})
+    return jsonify({
+        'user_id': cur_user_id,
+        'book_id': book_id,
+        'rating': info[2]
+    })
+
+
+@app.route('/api/books/rating/<int:book_id>/<int:rate>', methods=['GET', 'POST'])
 def add_or_change_rating(book_id, rate):
     cache_conn = connect.get_cache_db()
     collection = cache_conn['books_cache']
     conn = connect.get_connection_db()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO ratings (user_id, book_id, rating) VALUES (1, %s, %s)", (book_id, rate))
-    conn.commit()
+    cur_user_id = current_user.id
+    cursor.execute("SELECT user_id, book_id, rating FROM ratings WHERE (user_id = %s) AND (book_id = %s)",
+                   (cur_user_id, book_id))
+    if cursor.fetchone() is None:
+        cursor.execute("INSERT INTO ratings (user_id, book_id, rating) VALUES (%s, %s, %s)",
+                       (cur_user_id, book_id, rate))
+        conn.commit()
+    else:
+        cursor.execute("UPDATE ratings SET rating = (%s) WHERE (user_id = %s) AND (book_id = %s)",
+                       (rate, cur_user_id, book_id))
+        # cursor.execute("INSERT INTO ratings (user_id, book_id, rating) VALUES (%s, %s, %s)",
+        #                (cur_user_id, book_id, rate))
+        conn.commit()
     cursor.execute("SELECT calculate_rating(%s)", [book_id])
     curr_rating = cursor.fetchone()
     collection.update_one(
@@ -186,6 +224,67 @@ def add_or_change_rating(book_id, rate):
         {"$set": {"rating": curr_rating}}
     )
     conn.close()
+    return jsonify({"message": "rating was added or changed"}), 200
+
+
+@app.route('/api/user/favourites', methods=['GET'])
+def get_favourites_list():
+    favs = []
+    conn = connect.get_connection_db()
+    cursor = conn.cursor()
+    cache_conn = connect.get_cache_db()
+    collection = cache_conn['books_cache']
+    cur_user_id = current_user.id
+    cursor.execute("SELECT user_id, book_id FROM favourites WHERE user_id = (%s)", (cur_user_id,))
+    for elem in cursor.fetchall():
+        cur_id = elem[1]
+        print(cur_id)
+        favs.append(collection.find_one({"_id": cur_id}))
+    return jsonify(favs)
+
+
+@app.route('/api/books/check-favourites/<int:book_id>', methods=['GET'])
+def is_book_in_favourites(book_id):
+    conn = get_connection_db()
+    cursor = conn.cursor()
+    cur_user_id = current_user.id
+    cursor.execute("SELECT user_id, book_id FROM favourites WHERE user_id = (%s) AND book_id = (%s)",
+                   (cur_user_id, book_id))
+    if cursor.fetchone() is None:
+        return jsonify({"message": "button-fav"})
+    else:
+        return jsonify({"message": "button-fav validate"})
+
+
+
+@app.route('/api/books/favourites/<int:book_id>', methods=['POST'])
+def add_or_delete_favourites(book_id):
+    conn = get_connection_db()
+    cursor = conn.cursor()
+    cur_user_id = current_user.id
+    cursor.execute("SELECT user_id, book_id FROM favourites WHERE user_id = (%s) AND book_id = (%s)",
+                   (cur_user_id, book_id))
+    if cursor.fetchone() is None:
+        cursor.execute("INSERT INTO favourites (user_id, book_id) VALUES (%s, %s)", (cur_user_id, book_id))
+        conn.commit()
+        return jsonify({"message": f"book {book_id} was added to {cur_user_id} favourites"})
+    else:
+        cursor.execute("DELETE FROM favourites WHERE user_id = (%s) AND book_id = (%s)",
+                   (cur_user_id, book_id))
+        conn.commit()
+        return jsonify({"message": f"the book {book_id} is already in {cur_user_id} favourites"})
+
+
+@app.route('/api/favourites', methods=['GET'])
+@login_required
+def get_favourites():
+    return jsonify({'number': '10'})
+
+
+@app.route('/api/ratingsNum', methods=['GET'])
+@login_required
+def get_ratings_num():
+    return jsonify({'number': '10'})
 
 
 @app.route('/api/autocomplete', methods=['GET'])
@@ -200,8 +299,8 @@ def autocomplete():
     results = collection.find(
         {
             "$or": [
-                {"title": {"$regex": query, "$options": "i"}},
-                {"author": {"$regex": query, "$options": "i"}},
+                {"title": {"$regex": f"\\b{query}", "$options": "i"}},
+                {"author": {"$regex": f"\\b{query}", "$options": "i"}},
             ]
         },
     ).limit(16)  # Ограничение для автозаполнения
