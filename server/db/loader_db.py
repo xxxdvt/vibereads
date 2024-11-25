@@ -13,7 +13,7 @@ params = {
     "subject": "Fiction",  # Категория Fiction
     "languages": ["en"]  # Фильтрация по английскому языку
 }
-max_pages = 5
+max_pages = 25
 current_page = 1
 
 authors_books_list = []
@@ -43,10 +43,10 @@ while url and current_page <= max_pages:  # Пока существует ссы
             collection.insert_one(book_example)
             print(f"ID: {book_id}\nTitle: {title}\nAuthor(s): {author_names}\n")
 
-            # cursor.execute(
-            #     "INSERT INTO books (book_id, title) VALUES (%s, %s)", (book_id, title)
-            # )
-            # conn.commit()
+            cursor.execute(
+                "INSERT INTO books (book_id, title) VALUES (%s, %s)", (book_id, title)
+            )
+            conn.commit()
 
         # Обновляем URL на следующую страницу
         url = data.get('next')
@@ -55,20 +55,20 @@ while url and current_page <= max_pages:  # Пока существует ссы
     else:
         print("Failed to retrieve data from the API.")
         break
-# for author in set([info[0] if info[0] != '' else 'No author' for info in authors_books_list]):
-#     cursor.execute(
-#         "INSERT INTO authors (name) VALUES (%s)", (author,)
-#     )
-#     conn.commit()
-# for author, book in authors_books_list:
-#     cursor.execute("SELECT book_id FROM books WHERE title = (%s)", (book,))
-#     id_book = cursor.fetchone()
-#     cursor.execute("SELECT author_id FROM authors WHERE name = (%s)", (author,))
-#     id_author = cursor.fetchone()
-#     cursor.execute(
-#         "INSERT INTO book_author (book_id, author_id) VALUES (%s, %s)", (id_book, id_author)
-#     )
-#     conn.commit()
+for author in set([info[0] if info[0] != '' else 'No author' for info in authors_books_list]):
+    cursor.execute(
+        "INSERT INTO authors (name) VALUES (%s)", (author,)
+    )
+    conn.commit()
+for author, book in authors_books_list:
+    cursor.execute("SELECT book_id FROM books WHERE title = (%s)", (book,))
+    id_book = cursor.fetchone()
+    cursor.execute("SELECT author_id FROM authors WHERE name = (%s)", (author,))
+    id_author = cursor.fetchone()
+    cursor.execute(
+        "INSERT INTO book_author (book_id, author_id) VALUES (%s, %s)", (id_book, id_author)
+    )
+    conn.commit()
 
 cursor.close()
 print("Загрузка данных завершена и сохранена в базу.")

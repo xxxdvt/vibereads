@@ -4,12 +4,13 @@ import '../scss/BookPage.css'
 import AnimatedButton from "../components/FavouritesButton";
 import {Rating} from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Loader from "../components/Loader";
 
 function BookPage(props) {
     const {bookId} = useParams();
     localStorage.setItem('curBook', bookId);
     const [bookInfo, setBookInfo] = useState(null);
-    useEffect( () => {
+    useEffect(() => {
         async function fetchBookInfo() {
             const response = await fetch(`http://127.0.0.1:5000/api/books/book/${bookId}`, {
                 method: "GET",
@@ -21,11 +22,12 @@ function BookPage(props) {
             const data = await response.json();
             setBookInfo(data);
         }
+
         fetchBookInfo().then();
     }, [bookId])
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(0);
 
-    useEffect( () => {
+    useEffect(() => {
         async function fetchRatingInfo() {
             const response = await fetch(`http://127.0.0.1:5000/api/books/rating/${bookId}`, {
                 "method": "GET",
@@ -37,12 +39,16 @@ function BookPage(props) {
             const data = await response.json();
             setValue(data['rating']);
         }
+
         fetchRatingInfo().then();
     }, [bookId])
 
 
     async function handleChangeRating(event, newValue) {
         setValue(newValue);
+        if (newValue === null) {
+            newValue = 0;
+        }
         const response = await fetch(`http://127.0.0.1:5000/api/books/rating/${bookId}/${newValue}`, {
             method: "POST",
             credentials: "include",
@@ -69,7 +75,7 @@ function BookPage(props) {
     return (
         <div className='book-page-wrapper'>
             {bookInfo ? (
-                <div  className='book-grid-column-container'>
+                <div className='book-grid-column-container'>
                     <div className='book-grid-fav-rate-img'>
                         <img src={bookInfo['thumbnail']} alt='Cover' className="book-info-img"/>
                         <div className="add-book-to-favourites" onClick={handleAddToFavourites}>
@@ -82,7 +88,7 @@ function BookPage(props) {
                                 onChange={handleChangeRating}
                                 size="large"
                                 emptyIcon={
-                                    <StarBorderIcon style={{ color: "#888" }} fontSize="inherit" /> // Цвет для пустых звезд
+                                    <StarBorderIcon style={{color: "#888"}} fontSize="inherit"/> // Цвет для пустых звезд
                                 }
                             />
                         </div>
@@ -95,7 +101,11 @@ function BookPage(props) {
                             {bookInfo.author}
                         </div>
                         <div className="book-grid-rating">
-                            {bookInfo.rating}
+                            {(bookInfo.rating === '0/5') ? (
+                                <span>Нет оценок</span>
+                                ) : (
+                                    <span>{bookInfo.rating}</span>
+                                )}
                         </div>
                         <div className="wrap read-online">
                             <button className="button"><a href={bookInfo.text}>Читать онлайн</a></button>
@@ -104,7 +114,7 @@ function BookPage(props) {
 
                 </div>
             ) : (
-                <div>Загрузка...</div>
+                <Loader />
             )}
 
         </div>

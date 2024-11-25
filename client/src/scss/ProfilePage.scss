@@ -3,3 +3,21 @@
   height: 90%;
   flex: 1;
 }
+
+.edit-title {
+  font-weight: 600;
+  position: relative;
+  margin: 40px 0 10px 0;
+  font-size: 2em;
+
+  &:before {
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 155px;
+    left: 100px;
+    bottom: 1px;
+    border-radius: 5px;
+    background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+  }
+}

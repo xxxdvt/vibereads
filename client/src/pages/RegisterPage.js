@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import '../scss/RegisterPage.css';
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
+import AlertDialogSlide from "../components/AlertDialog";
 
 function RegisterPage() {
     const [name, setName] = useState('');
@@ -11,6 +12,8 @@ function RegisterPage() {
     const [passwordCheck, setPasswordCheck] = useState('');
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
+
+    const [alertFlag, setAlertFlag] = useState(false);
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -26,13 +29,12 @@ function RegisterPage() {
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    // Авторизуем пользователя в контексте
                     login(data);
                     navigate('/profile');
                 }
             })
             .catch(err => {
-                alert("Check your Login and Password")
+                setAlertFlag(true);
             })
     }
     return (
@@ -98,6 +100,9 @@ function RegisterPage() {
                     Уже есть аккаунт? <Link to='/login'>Войти</Link>
                 </div>
             </div>
+            {alertFlag &&
+                <AlertDialogSlide isDialog={false}/>
+            }
         </div>
     );
 }

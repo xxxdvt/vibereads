@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../scss/Carousel.css';
-import {useNavigate} from "react-router-dom"; // Подключение SCSS стилей
+import {useNavigate} from "react-router-dom";
+import AlertDialogSlide from "../components/AlertDialog"; // Подключение SCSS стилей
 
 const Carousel = ({func, books, sectionName, booksPerSlide = 4}) => {
     const [startIndex, setStartIndex] = useState(0); // Индекс первой отображаемой книги
@@ -57,6 +58,7 @@ const MultiCarousel = () => {
     const [books, setBooks] = useState([]);
     const [page, setPage] = useState(1);
     const [popularBooks, setPopularBooks] = useState([]);
+    const [alertFlag, setAlertFlag] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
         // Первоначальная загрузка книг
@@ -97,7 +99,8 @@ const MultiCarousel = () => {
         if (await checkUserLogin()) {
             navigate(`/books/${clickedId}`);
         } else {
-            alert('Login first')
+            setAlertFlag(false);
+            setTimeout(() => setAlertFlag(true), 0);
         }
     }
 
@@ -116,7 +119,7 @@ const MultiCarousel = () => {
     }, []);
 
     const section = {
-        sectionName: 'Популярное',
+        sectionName: 'Лучшие книги',
         books: popularBooks,
     };
 
@@ -127,17 +130,44 @@ const MultiCarousel = () => {
                 <div className="grid--container">
                     {books.map((book, index) => (
                             <div className="grid--container-elem" key={index}>
-                                <img src={book.thumbnail} alt={book.title} className="grid--container-elem-img" onClick={handleClickBookInfo}/>
+                                <img src={book.thumbnail} alt={book.title} className="grid--container-elem-img"
+                                     onClick={handleClickBookInfo}/>
                                 <div className="book-info">
                                     <p className='hn'>{book.title}</p>
                                     <p className='hn1'>{book.author}</p>
-                                    <p className='hn1'>{book.rating}</p>
+                                    <p className='hn1'>
+                                        {(book.rating === '0/5') ? (
+                                            <span>Нет оценок</span>
+                                        ) : (
+                                            <span>{book.rating}</span>
+                                        )}
+                                    </p>
                                 </div>
                             </div>
                         )
                     )}
                 </div>
-                <button onClick={loadMoreBooks} className='load-more-books'>Показать ещё</button>
+                <button
+                    onClick={loadMoreBooks}
+                    className='load-more-books'>
+                    <div className="text">
+                        <span>Показать</span>
+                        <span>еще</span>
+                    </div>
+                    <svg
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="h-6 w-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20px"
+                    >
+                        <path
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        ></path>
+                    </svg>
+                </button>
+
             </div>
             <Carousel
                 func={handleClickBookInfo}
@@ -146,6 +176,9 @@ const MultiCarousel = () => {
                 sectionName={section.sectionName}
                 booksPerSlide={4}
             />
+            {alertFlag && (
+                <AlertDialogSlide isDialog={true} defState={true} />
+            )}
         </div>
     );
 };

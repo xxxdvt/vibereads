@@ -1,7 +1,7 @@
 :root {
   --text: #07090e;
   --background: rgba(11, 2, 54, 1);
-  --primary: #1644c0;
+  --primary: #1545c5;
   --secondary: #86a4ee;
   --accent: #adc3fc;
   --text-color: #1771F1;
@@ -21,6 +21,19 @@
   --btn-bg: #003da5;
   --gray: #b0aeae;
   --rotating-color: #1644c0;
+  --bg1: #fffbfb;
+}
+
+[data-theme=admin] {
+  --text: #1a1a1a;
+  --background: #F0F6F4;
+  --primary: #078f67;
+  --secondary: #09c28b;
+  --accent: rgba(4, 224, 147, 0.85);
+  --text-color: #11b786;
+  --btn-bg: #003da5;
+  --gray: #b0aeae;
+  --rotating-color: #0da466;
   --bg1: #fffbfb;
 }
 

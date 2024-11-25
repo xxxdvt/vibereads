@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import debounce from 'lodash.debounce';
 import '../scss/Search.css';
 import {useNavigate} from "react-router-dom";
+import AlertDialogSlide from "../components/AlertDialog";
 
 
 const Search = () => {
@@ -9,6 +10,7 @@ const Search = () => {
     const [autocompleteResults, setAutocompleteResults] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const navigate = useNavigate();
+
     async function checkUserLogin() {
         const response = await fetch('http://127.0.0.1:5000/api/current_user', {
             "method": "GET",
@@ -21,13 +23,15 @@ const Search = () => {
         return data['message'] !== 'UNAUTHORIZED';
 
     }
+    const [alertFlag, setAlertFlag] = useState(false);
 
     const handleBookClick = async (event) => {
         const clickedId = parseInt(event.target.src.toString().split('/')[5]);
         if (await checkUserLogin()) {
             navigate(`/books/${clickedId}`);
         } else {
-            alert('Login first')
+            setAlertFlag(false);
+            setTimeout(() => setAlertFlag(true), 0);
         }
     }
     // Автозаполнение при каждом изменении текста
@@ -64,8 +68,6 @@ const Search = () => {
     return (
         <div>
             <form className="w-1/2 mx-auto" onSubmit={handleSearch}>
-                <label htmlFor="default-search"
-                       className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -93,12 +95,18 @@ const Search = () => {
             <div className='grid--container-search'>
                 {autocompleteResults.map((book, index) => (
                     <div className="grid--container-search-elem" key={index}>
-                        <img src={book["cover"]} alt={book.title} className="grid--container-search-elem-img"
+                        <img src={book["thumbnail"]} alt={book.title} className="grid--container-search-elem-img"
                              onClick={handleBookClick}/>
                         <div className="search-book-info">
                             <p className='search-hn'>{book.title}</p>
                             <p className='search-hn1'>{book.author}</p>
-                            <p className='search-hn1'>{book["rating"]}</p>
+                            <p className='search-hn1'>
+                                {(book['rating'] === '0/5') ? (
+                                    <span>Нет оценок</span>
+                                ) : (
+                                    <span>{book['rating']}</span>
+                                )}
+                            </p>
                         </div>
                     </div>
                 ))}
@@ -112,11 +120,19 @@ const Search = () => {
                         <div className="search-book-info">
                             <p className='search-hn'>{book.title}</p>
                             <p className='search-hn1'>{book.author}</p>
-                            <p className='search-hn1'>{book["rating"]}</p>
+                            <p className='search-hn1'>
+                                {(book['rating'] === '0/5') ? (
+                                    <span>Нет оценок</span>
+                                ) : (
+                                    <span>{book['rating']}</span>
+                                )}</p>
                         </div>
                     </div>
                 ))}
             </div>
+            {alertFlag && (
+                <AlertDialogSlide isDialog={true} defState={true} />
+            )}
         </div>
     );
 };

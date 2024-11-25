@@ -1,15 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
 import booksLogo from '../assets/icons/books-stack-of-three-svgrepo-com.svg';
 import ratingsLogo from '../assets/icons/rating-svgrepo-com.svg';
+import editIcon from '../assets/icons/pen.png';
 import '../scss/ProfilePage.css'
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
+import Loader from "../components/Loader";
+
+import {Avatar} from "@mui/material";
 
 function ProfilePage() {
     const [user, setUser] = useState(null);
     const [favouritesNumber, setFavouritesNumber] = useState(0);
     const [ratesNumber, setRatesNumber] = useState(0);
     const {logout} = useContext(AuthContext);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const navigate = useNavigate();
 
@@ -27,6 +32,7 @@ function ProfilePage() {
                 navigate('/login');
             } else {
                 setUser(data);
+                if (data['role'] === 'admin') setIsAdmin(true);
             }
         }
 
@@ -59,6 +65,7 @@ function ProfilePage() {
 
             await setFavouritesNumber(data.number);
         }
+
         getFavouritesNumber().then();
     }, [favouritesNumber]);
 
@@ -72,22 +79,45 @@ function ProfilePage() {
 
             await setRatesNumber(data.number);
         }
+
         getRatingsNumber().then();
     }, [ratesNumber]);
 
+    function getColorFromString(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const color = `#${((hash >> 24) & 0xFF).toString(16)}${((hash >> 16) & 0xFF).toString(16)}${((hash >> 8) & 0xFF).toString(16)}`.substring(0, 7);
+        return color.padEnd(7, '0');
+    }
     return (
         <div className="profile-wrapper">
             {user ? (
-                <div className="pt-4">
+                <div className={`pt-${isAdmin ? 1 : 8}`}>
                     <div className="max-w-sm mx-auto bg-white dark:bg-red-300 rounded-lg overflow-hidden shadow-2xl">
                         <div className="border-b px-4 pb-6">
-                            <div className="text-center my-4">
-                                <img
-                                    className="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
-                                    src="https://randomuser.me/api/portraits/women/21.jpg" alt=""/>
+                            <div className="text-center my-4 pt-4">
+                                <Avatar
+                                    sx={{
+                                        backgroundColor: getColorFromString(user.name + user.surname),
+                                        width: 96,
+                                        height: 96,
+                                        color: "white",
+                                        fontSize: "2em",
+                                        margin: '0 auto'
+                                    }}
+                                >
+                                    {user.name[0] + user.surname[0]}
+                                </Avatar>
                                 <div className="py-2">
-                                    <h3 className="font-bold text-2xl text-gray-800 dark:text-white mb-1">
-                                        {user.name} {user.surname}
+                                    <h3 className="font-bold flex justify-center text-2xl text-gray-800 dark:text-white mb-1">
+                                        {user.name} {user.surname} <img src={`${editIcon}`}
+                                                                        className="ml-2 w-5 h-5 top-1 relative"
+                                                                        alt="Edit"
+                                                                        onClick={()=> {
+                                                                            navigate('/profile/edit')
+                                                                        }}/>
                                     </h3>
                                     <div className="inline-flex text-gray-700 dark:text-gray-300 items-center">
 
@@ -123,6 +153,18 @@ function ProfilePage() {
                                     Выйти
                                 </button>
                             </div>
+                            {isAdmin &&
+                                <div className='px-2 py-3'>
+                                <button
+                                    className="w-full rounded-full bg-emerald-600 dark:bg-emerald-800 text-white dark:text-white antialiased font-bold hover:bg-emerald-700 dark:hover:bg-emerald-900 px-4 py-2"
+                                    onClick={() => {
+                                        navigate('/admin');
+                                    }}
+                                >
+                                    Админ-панель
+                                </button>
+                                </div>
+                            }
                         </div>
                         <div className="px-4 pt-4">
                             <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
@@ -132,19 +174,25 @@ function ProfilePage() {
                                     src={`${booksLogo}`}
                                     alt="Favs"
                                 />
-                                <span><strong
+                                <span style={{cursor: "pointer"}}
+                                    onClick={() => {
+                                        navigate('/user/favourites');
+                                    }}><strong
                                     className="text-black dark:text-white">{favouritesNumber}</strong> Favourites</span>
                             </div>
                         </div>
                         <div className="px-4">
-                            <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4" >
 
                                 <img
                                     className="h-5 w-5 text-gray-400 dark:text-gray-600 mr-1" width="24"
                                     src={`${ratingsLogo}`}
                                     alt="Favs"
                                 />
-                                <span><strong
+                                <span style={{cursor: "pointer"}}
+                                    onClick={() => {
+                                        navigate('/user/ratings');
+                                    }}><strong
                                     className="text-black dark:text-white">{ratesNumber}</strong> Ratings</span>
                             </div>
                         </div>
@@ -152,7 +200,7 @@ function ProfilePage() {
 
                 </div>
             ) : (
-                <div>Загрузка...</div>
+                <Loader />
             )}
         </div>
     );

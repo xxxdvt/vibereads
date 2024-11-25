@@ -15,11 +15,14 @@ def get_books_by_mood(mood: str):
         messages=[
             {
                 "role": "user",
-                "content": "There is the site https://gutendex.com/books. It contains JSON info about lots of books. "
-                           "Can you give me just the list of titles of 16 books from it"
-                           "that match the mood of the next sentence: "
-                           f"{mood}"
-                           "I need only the list"
+                "content": "Search the first 25 pages of Gutendex (https://gutendex.com/books/). "
+                           "Based on the description: "
+                           f"{mood}, "
+                           "provide me with a list of 25 books that fit the mood, "
+                           "matching with metadata such as titles, subjects, or themes. "
+                           "Return the list only, with no numbering or additional details. SEARCH ONLY THE FIRST 25 "
+                           "PAGES: THAT MEANS YOU CAN WATCH ONLY https://gutendex.com/books/?page=1, "
+                           "https://gutendex.com/books/?page=2, ... and so on till https://gutendex.com/books/?page=25"
             },
         ],
         model="llama3-8b-8192",
@@ -27,21 +30,7 @@ def get_books_by_mood(mood: str):
 
     answer = chat_completion.choices[0].message.content
 
-    formatted_answer = []
-
-    for a in answer.split('\n'):
-        try:
-            if a[0] in '0123456789':
-                if 'by' in a:
-                    formatted_answer.append(
-                        a.split('.', 1)[1].split('by')[0].replace("\"", "").strip()
-                    )
-                else:
-                    formatted_answer.append(
-                        a.split('.', 1)[1].replace("\"", "").strip()
-                    )
-        except:
-            pass
+    formatted_answer = [book for book in answer.split('\n')[2:]]
 
     return formatted_answer
 
